@@ -10,7 +10,6 @@
       --bleu:#0050a8;
       --cyan:#00bfff;
       --blanc:#ffffff;
-      --txt:#122033;
       --radius:14px;
       --shadow:0 10px 25px rgba(0,0,0,0.25);
     }
@@ -32,18 +31,11 @@
     .logo-box{
       display:flex;
       align-items:center;
-      gap:12px;
+      gap:10px;
     }
-    .logo-mark{
-      width:42px;
-      height:42px;
-      border-radius:12px;
-      background:linear-gradient(135deg,var(--cyan),var(--bleu));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      font-size:20px;
+    .logo-box img{
+      height:30px;
+      object-fit:contain;
     }
     .logo-text span{
       display:block;
@@ -53,7 +45,7 @@
       opacity:.8;
     }
     .logo-text strong{
-      font-size:17px;
+      font-size:16px;
       letter-spacing:1px;
     }
     .cta-top{
@@ -154,14 +146,6 @@
       position:relative;
       overflow:hidden;
     }
-    .hero-mockup::before{
-      content:"Démo mur tactile";
-      position:absolute;
-      top:14px;
-      right:18px;
-      font-size:11px;
-      opacity:.65;
-    }
     .phone-frame{
       width:100%;
       max-width:320px;
@@ -180,43 +164,14 @@
       background:rgba(0,0,0,.65);
       margin:0 auto 10px;
     }
-    .phone-header{
-      display:flex;
-      justify-content:space-between;
-      font-size:11px;
-      opacity:.9;
-      margin-bottom:8px;
-    }
-    .phone-title{
-      font-size:13px;
-      letter-spacing:1px;
-    }
     .phone-screen{
       flex:1;
       border-radius:20px;
-      background:radial-gradient(circle at top,#3ddcff,#001326 60%);
-      padding:16px 14px;
+      background:radial-gradient(circle at top,#34d3ff,#001326 65%);
+      padding:12px 12px 14px;
       display:flex;
       flex-direction:column;
-      justify-content:space-between;
       color:#e8fbff;
-    }
-    .dolphin{
-      width:90px;
-      height:90px;
-      border-radius:50%;
-      background:radial-gradient(circle at 30% 10%,#ffffff 0,#8df0ff 25%,#1c9dff 60%,#003b88 100%);
-      margin:0 auto 8px;
-      box-shadow:0 0 24px rgba(0,245,255,.9);
-      position:relative;
-    }
-    .dolphin::after{
-      content:"JQ";
-      position:absolute;
-      bottom:8px;
-      right:10px;
-      font-size:11px;
-      font-weight:700;
     }
     .phone-grid{
       display:grid;
@@ -352,7 +307,7 @@
       font-weight:600;
     }
 
-    /* MODALE DÉTAIL */
+    /* MODALE DÉTAIL – image format A4 lisible */
     .modal-backdrop{
       position:fixed;
       inset:0;
@@ -363,8 +318,8 @@
       z-index:50;
     }
     .modal{
-      width:min(780px,92vw);
-      max-height:90vh;
+      width:min(900px,95vw);
+      max-height:95vh;
       overflow:auto;
       background:radial-gradient(circle at top left,#172554,#020617 55%);
       border-radius:22px;
@@ -399,7 +354,7 @@
     }
     .modal-layout{
       display:grid;
-      grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
+      grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
       gap:16px;
     }
     @media(max-width:800px){
@@ -408,13 +363,12 @@
     .modal-thumb{
       border-radius:16px;
       overflow:hidden;
-      height:190px;
       margin-bottom:10px;
     }
     .modal-thumb img{
       width:100%;
-      height:100%;
-      object-fit:cover;
+      height:auto;
+      display:block;
     }
     .modal-info{
       font-size:13px;
@@ -469,7 +423,7 @@
 
 <header>
   <div class="logo-box">
-    <div class="logo-mark">JQ</div>
+    <img src="assets/logo-wall2touch.png" alt="Wall2Touch" />
     <div class="logo-text">
       <span>WALL2TOUCH</span>
       <strong>Mur Tactile • Robot JQ</strong>
@@ -509,18 +463,39 @@
   <div class="hero-mockup">
     <div class="phone-frame">
       <div class="phone-notch"></div>
-      <div class="phone-header">
-        <div class="phone-title">WALL2TOUCH</div>
-        <div>18:35</div>
-      </div>
       <div class="phone-screen">
-        <div>
-          <div style="font-size:11px;opacity:.9;margin-bottom:4px;">Sélection du jeu</div>
-          <div class="dolphin"></div>
-          <div style="text-align:center;font-size:11px;margin-bottom:6px;">
-            Robot JQ vous guide dans chaque expérience immersive.
+        <!-- bandeau logo + heure -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.08em;">WALL2TOUCH</span>
+          <span style="font-size:11px;opacity:.85;">18:35</span>
+        </div>
+
+        <!-- zone robot + texte -->
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="
+            flex:0 0 38%;
+            background:radial-gradient(circle at 30% 10%,#ffffff 0,#8df0ff 25%,#1c9dff 60%,#003b88 100%);
+            border-radius:18px;
+            padding:8px;
+            display:flex;
+            align-items:flex-end;
+            justify-content:center;
+            box-shadow:0 0 18px rgba(0,245,255,.7);">
+            <img src="assets/robot-jq.png" alt="Robot JQ"
+                 style="width:100%;height:auto;display:block;">
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:600;margin-bottom:4px;">
+              Sélection du jeu
+            </div>
+            <p style="font-size:11px;line-height:1.4;opacity:.9;margin:0;">
+              Robot JQ vous guide dans chaque expérience immersive
+              sur le mur tactile Wall2Touch.
+            </p>
           </div>
         </div>
+
+        <!-- grille des jeux -->
         <div class="phone-grid">
           <div class="phone-card">Math<br/>Flottants</div>
           <div class="phone-card">Magie<br/>Géométrie</div>
@@ -529,7 +504,8 @@
           <div class="phone-card">Catch<br/>JQ</div>
           <div class="phone-card">Holo<br/>Dessin</div>
         </div>
-        <div class="phone-footer">
+
+        <div class="phone-footer" style="margin-top:12px;">
           <span>1 joueur • Gestuelle</span>
           <span>Durée : 2–4 min</span>
         </div>
@@ -573,9 +549,7 @@
     </div>
     <div class="modal-layout">
       <div>
-        <div class="modal-thumb" id="modal-thumb">
-          <!-- image -->
-        </div>
+        <div class="modal-thumb" id="modal-thumb"></div>
         <div class="modal-kpis" id="modal-kpis"></div>
       </div>
       <div class="modal-info">
@@ -608,295 +582,108 @@
 
 <script>
 const modules = [
-  {
-    id:"main",
-    title:"WALL2TOUCH : Application principale",
-    version:"Hub des 17 jeux",
-    age:"4+",
-    duration:"2 min",
-    players:"1 à 3 joueurs",
-    type:"Gestuelle • VR sans casque",
-    image:"assets/affiche-01.jpg",
+  { id:"main", title:"WALL2TOUCH : Application principale", version:"Hub des 17 jeux",
+    age:"4+", duration:"2 min", players:"1 à 3 joueurs",
+    type:"Gestuelle • VR sans casque", image:"assets/affiche-01.jpg",
     tags:["Hub central","Sélection de jeux","Score & chrono"],
     short:"Point d’entrée principal qui regroupe tous les univers : Math, Géométrie, Espace, Jeux, Souvenirs.",
-    pedago:[
-      "Découverte libre des jeux adaptés à l’âge",
-      "Motivation par le score et le temps",
-      "Apprentissage par exploration"
-    ]
-  },
-  {
-    id:"math",
-    title:"MATH EN FLOTTANTS",
-    version:"Version 1.0.0",
-    age:"6+",
-    duration:"2 min",
-    players:"1 joueur",
-    type:"Gestuelle • Vision par ordinateur",
-    image:"assets/affiche-02.jpg",
+    pedago:["Découverte libre des jeux adaptés à l’âge","Motivation par le score et le temps","Apprentissage par exploration"] },
+  { id:"math", title:"MATH EN FLOTTANTS", version:"Version 1.0.0",
+    age:"6+", duration:"2 min", players:"1 joueur",
+    type:"Gestuelle • Vision par ordinateur", image:"assets/affiche-02.jpg",
     tags:["Mathématiques","Equations","Chiffres flottants"],
     short:"Les mains remplacent la souris : l’enfant manipule chiffres et symboles pour résoudre des équations en temps réel.",
-    pedago:[
-      "Compréhension des opérations de base",
-      "Lien entre geste et symbole numérique",
-      "Renforcement de la concentration"
-    ]
-  },
-  {
-    id:"geo",
-    title:"LA MAGIE DE LA GEOMETRIE",
-    version:"Version 1.0.0",
-    age:"7+",
-    duration:"3 min",
-    players:"1 joueur",
-    type:"Gestuelle • Dessin direct",
-    image:"assets/affiche-03.jpg",
+    pedago:["Compréhension des opérations de base","Lien entre geste et symbole numérique","Renforcement de la concentration"] },
+  { id:"geo", title:"LA MAGIE DE LA GEOMETRIE", version:"Version 1.0.0",
+    age:"7+", duration:"3 min", players:"1 joueur",
+    type:"Gestuelle • Dessin direct", image:"assets/affiche-03.jpg",
     tags:["Formes géométriques","Coordination","Score chronométré"],
     short:"Guidé par une voix interactive, l’enfant dessine des formes géométriques avec ses doigts et obtient un score de précision.",
-    pedago:[
-      "Reconnaissance des formes et figures",
-      "Coordination œil–main",
-      "Esprit logique et sens du détail"
-    ]
-  },
-  {
-    id:"terre-espace",
-    title:"TERRE & ESPACE",
-    version:"Version 1.0.0",
-    age:"7+",
-    duration:"3 min",
-    players:"1 joueur",
-    type:"Quiz vocal • Exploration",
-    image:"assets/affiche-04.jpg",
+    pedago:["Reconnaissance des formes et figures","Coordination œil–main","Esprit logique et sens du détail"] },
+  { id:"terre-espace", title:"TERRE & ESPACE", version:"Version 1.0.0",
+    age:"7+", duration:"3 min", players:"1 joueur",
+    type:"Quiz vocal • Exploration", image:"assets/affiche-04.jpg",
     tags:["Sciences","Quiz","Aventure guidée"],
     short:"Une exploration guidée par la voix à travers jungles, océans et galaxies avec des questions à chaque étape.",
-    pedago:[
-      "Culture générale sur les milieux naturels et l’espace",
-      "Expression orale grâce aux réponses vocales",
-      "Esprit de décision par le choix d’itinéraires"
-    ]
-  },
-  {
-    id:"objets3d",
-    title:"CONSTRUCTION DES OBJETS EN 3D",
-    version:"Version 1.1 – VR sans casque",
-    age:"7+",
-    duration:"3 min",
-    players:"1 joueur",
-    type:"VR gestuelle",
-    image:"assets/affiche-05.jpg",
+    pedago:["Culture générale sur les milieux naturels et l’espace","Expression orale grâce aux réponses vocales","Esprit de décision par le choix d’itinéraires"] },
+  { id:"objets3d", title:"CONSTRUCTION DES OBJETS EN 3D", version:"Version 1.1 – VR sans casque",
+    age:"7+", duration:"3 min", players:"1 joueur",
+    type:"VR gestuelle", image:"assets/affiche-05.jpg",
     tags:["3D","Créativité","Immersion"],
     short:"L’enfant dessine avec deux mains pour donner vie à des objets 3D projetés sur le mur, comme dans une VR sans casque.",
-    pedago:[
-      "Compréhension des volumes et de la perspective",
-      "Développement de l’imagination spatiale",
-      "Lien entre geste et rendu numérique"
-    ]
-  },
-  {
-    id:"mario",
-    title:"JEUX MARIO",
-    version:"Version 1.0.0",
-    age:"6+",
-    duration:"2 min",
-    players:"1 joueur",
-    type:"Gestuelle murale",
-    image:"assets/affiche-06.jpg",
+    pedago:["Compréhension des volumes et de la perspective","Développement de l’imagination spatiale","Lien entre geste et rendu numérique"] },
+  { id:"mario", title:"JEUX MARIO", version:"Version 1.0.0",
+    age:"6+", duration:"2 min", players:"1 joueur",
+    type:"Gestuelle murale", image:"assets/affiche-06.jpg",
     tags:["Plateforme","Motricité","Réflexes"],
     short:"Le mur devient un grand terrain de jeu type plateforme où l’enfant contrôle son personnage par les gestes.",
-    pedago:[
-      "Coordination globale du corps",
-      "Anticipation des obstacles",
-      "Gestion du temps de réaction"
-    ]
-  },
-  {
-    id:"catchjq",
-    title:"JEUX CATCH_JQ",
-    version:"Version 1.0.0",
-    age:"4+",
-    duration:"2 min",
-    players:"1 joueur",
-    type:"Gestuelle",
-    image:"assets/affiche-07.jpg",
+    pedago:["Coordination globale du corps","Anticipation des obstacles","Gestion du temps de réaction"] },
+  { id:"catchjq", title:"JEUX CATCH_JQ", version:"Version 1.0.0",
+    age:"4+", duration:"2 min", players:"1 joueur",
+    type:"Gestuelle", image:"assets/affiche-07.jpg",
     tags:["Coordination","Course poursuite","Robot JQ"],
     short:"Le joueur doit attraper le robot JQ qui se déplace partout sur le mur, uniquement avec les mains.",
-    pedago:[
-      "Développement de la motricité fine et globale",
-      "Attention et réactivité",
-      "Gestion de l’espace visuel"
-    ]
-  },
-  {
-    id:"holo1",
-    title:"DESSIN HOLOGRAPHIQUE",
-    version:"Version 1.1.1 – VR sans casque",
-    age:"5+",
-    duration:"3 min",
-    players:"1 joueur",
-    type:"VR gestuelle • Reconnaissance vocale",
-    image:"assets/affiche-08.jpg",
+    pedago:["Développement de la motricité fine et globale","Attention et réactivité","Gestion de l’espace visuel"] },
+  { id:"holo1", title:"DESSIN HOLOGRAPHIQUE", version:"Version 1.1.1 – VR sans casque",
+    age:"5+", duration:"3 min", players:"1 joueur",
+    type:"VR gestuelle • Reconnaissance vocale", image:"assets/affiche-08.jpg",
     tags:["Hologrammes","Musique","Créativité"],
     short:"L’enfant dessine avec son index des traits lumineux autour du robot JQ, accompagnés d’effets sonores et musicaux.",
-    pedago:[
-      "Expression artistique libre",
-      "Synchronisation geste–son",
-      "Développement de l’imaginaire"
-    ]
-  },
-  {
-    id:"holo2",
-    title:"DESSIN HOLOGRAPHIQUE – Réseaux 3D",
-    version:"Version 1.1.2 – VR sans casque",
-    age:"5+",
-    duration:"3 min",
-    players:"1 joueur",
-    type:"VR gestuelle",
-    image:"assets/affiche-09.jpg",
+    pedago:["Expression artistique libre","Synchronisation geste–son","Développement de l’imaginaire"] },
+  { id:"holo2", title:"DESSIN HOLOGRAPHIQUE – Réseaux 3D", version:"Version 1.1.2 – VR sans casque",
+    age:"5+", duration:"3 min", players:"1 joueur",
+    type:"VR gestuelle", image:"assets/affiche-09.jpg",
     tags:["Réseaux lumineux","Volume","Observation"],
     short:"Les traits de lumière deviennent des filets 3D qui entourent l’enfant, créant un paysage holographique complexe.",
-    pedago:[
-      "Perception de la profondeur",
-      "Patience et persévérance",
-      "Lien entre sciences et art numérique"
-    ]
-  },
-  {
-    id:"build3d",
-    title:"CONSTRUIRE DES OBJETS EN 3D",
-    version:"Version 1.1.2 – VR sans casque",
-    age:"5+",
-    duration:"3 min",
-    players:"1 joueur",
-    type:"VR gestuelle",
-    image:"assets/affiche-10.jpg",
+    pedago:["Perception de la profondeur","Patience et persévérance","Lien entre sciences et art numérique"] },
+  { id:"build3d", title:"CONSTRUIRE DES OBJETS EN 3D", version:"Version 1.1.2 – VR sans casque",
+    age:"5+", duration:"3 min", players:"1 joueur",
+    type:"VR gestuelle", image:"assets/affiche-10.jpg",
     tags:["Assemblage","Construction","Imagination"],
     short:"À partir de formes lumineuses, l’enfant assemble pas à pas un objet 3D complet dans l’espace projeté.",
-    pedago:[
-      "Pensée séquentielle (étape par étape)",
-      "Compétences pré‑architecture",
-      "Logique de construction"
-    ]
-  },
-  {
-    id:"points",
-    title:"CONSTRUIT DES POINTS LUMINEUX",
-    version:"Version 1.1.4 – VR sans casque",
-    age:"5+",
-    duration:"3 min",
-    players:"1 joueur",
-    type:"VR gestuelle",
-    image:"assets/affiche-11.jpg",
+    pedago:["Pensée séquentielle (étape par étape)","Compétences pré‑architecture","Logique de construction"] },
+  { id:"points", title:"CONSTRUIT DES POINTS LUMINEUX", version:"Version 1.1.4 – VR sans casque",
+    age:"5+", duration:"3 min", players:"1 joueur",
+    type:"VR gestuelle", image:"assets/affiche-11.jpg",
     tags:["Motricité fine","Repérage","Lumière"],
     short:"L’enfant active des carreaux lumineux en touchant la surface, créant des motifs et chemins scintillants.",
-    pedago:[
-      "Précision des gestes",
-      "Reconnaissance de motifs",
-      "Créativité visuelle"
-    ]
-  },
-  {
-    id:"lego",
-    title:"LE LEGO MES HEROS",
-    version:"Version 1.0.0",
-    age:"5+",
-    duration:"3 min",
-    players:"1 joueur",
-    type:"Reconnaissance vocale • Gestuelle",
-    image:"assets/affiche-12.jpg",
+    pedago:["Précision des gestes","Reconnaissance de motifs","Créativité visuelle"] },
+  { id:"lego", title:"LE LEGO MES HEROS", version:"Version 1.0.0",
+    age:"5+", duration:"3 min", players:"1 joueur",
+    type:"Reconnaissance vocale • Gestuelle", image:"assets/affiche-12.jpg",
     tags:["Héros","Construction","Narration"],
     short:"En suivant les instructions vocales, l’enfant construit petit à petit sa figurine de héros comme avec des LEGO.",
-    pedago:[
-      "Compréhension orale",
-      "Planification et organisation",
-      "Création de personnages et d’histoires"
-    ]
-  },
-  {
-    id:"avion",
-    title:"SIMULATION DE L’AVION",
-    version:"Version 1.0.0",
-    age:"5+",
-    duration:"4 min",
-    players:"1 joueur",
-    type:"Gestuelle • Simulation",
-    image:"assets/affiche-13.jpg",
+    pedago:["Compréhension orale","Planification et organisation","Création de personnages et d’histoires"] },
+  { id:"avion", title:"SIMULATION DE L’AVION", version:"Version 1.0.0",
+    age:"5+", duration:"4 min", players:"1 joueur",
+    type:"Gestuelle • Simulation", image:"assets/affiche-13.jpg",
     tags:["Pilotage","Orientation","Immersion"],
     short:"L’enfant pilote un avion avec les gestes de ses bras, comme un véritable commandant de bord.",
-    pedago:[
-      "Notions de direction et trajectoire",
-      "Gestion de la coordination bilatérale",
-      "Confiance en soi par le rôle de pilote"
-    ]
-  },
-  {
-    id:"ra",
-    title:"LA REALITEE AUGMENTEE",
-    version:"Version 1.0.0",
-    age:"5+",
-    duration:"4 min",
-    players:"1 joueur",
-    type:"Réalité augmentée",
-    image:"assets/affiche-14.jpg",
+    pedago:["Notions de direction et trajectoire","Coordination bilatérale","Confiance en soi par le rôle de pilote"] },
+  { id:"ra", title:"LA REALITEE AUGMENTEE", version:"Version 1.0.0",
+    age:"5+", duration:"4 min", players:"1 joueur",
+    type:"Réalité augmentée", image:"assets/affiche-14.jpg",
     tags:["Héros","Interaction","Univers mixte"],
     short:"L’enfant entre dans une scène RA avec des personnages emblématiques et tente de les attraper.",
-    pedago:[
-      "Compréhension de l’espace mixte réel/virtuel",
-      "Agilité et esquive",
-      "Capacité d’attention prolongée"
-    ]
-  },
-  {
-    id:"gouttes",
-    title:"ATTRAPE DES GOUTES D’EAU",
-    version:"Version 1.0.0",
-    age:"5+",
-    duration:"4 min",
-    players:"1 joueur",
-    type:"Gestuelle • Score",
-    image:"assets/affiche-15.jpg",
+    pedago:["Compréhension de l’espace mixte réel/virtuel","Agilité et esquive","Capacité d’attention prolongée"] },
+  { id:"gouttes", title:"ATTRAPE DES GOUTES D’EAU", version:"Version 1.0.0",
+    age:"5+", duration:"4 min", players:"1 joueur",
+    type:"Gestuelle • Score", image:"assets/affiche-15.jpg",
     tags:["Eau","Vitesse","Coordination"],
     short:"Guidé par la voix, l’enfant attrape un maximum de gouttes d’eau qui tombent sur le mur.",
-    pedago:[
-      "Rapidité de décision",
-      "Contrôle moteur des mains",
-      "Gestion de la frustration et du challenge"
-    ]
-  },
-  {
-    id:"home",
-    title:"BUILDING HOME",
-    version:"Version 1.0.0",
-    age:"7+",
-    duration:"4 min",
-    players:"1 joueur",
-    type:"Gestuelle • Guidance vocale",
-    image:"assets/affiche-16.jpg",
+    pedago:["Rapidité de décision","Contrôle moteur des mains","Gestion de la frustration et du challenge"] },
+  { id:"home", title:"BUILDING HOME", version:"Version 1.0.0",
+    age:"7+", duration:"4 min", players:"1 joueur",
+    type:"Gestuelle • Guidance vocale", image:"assets/affiche-16.jpg",
     tags:["Architecture","Etapes","Création"],
     short:"Grâce à la détection des mains, l’enfant dessine et construit une maison en suivant les instructions vocales.",
-    pedago:[
-      "Compréhension des étapes de construction",
-      "Visualisation 3D d’une maison",
-      "Lien entre créativité et règles techniques"
-    ]
-  },
-  {
-    id:"souvenirs",
-    title:"BOX DES SOUVENIRS : SOUVENIR AVEC MAMAN !",
-    version:"Version 1.0.0",
-    age:"5+",
-    duration:"4 min",
-    players:"1 joueur",
-    type:"Gestuelle • Emotion",
-    image:"assets/affiche-17.jpg",
+    pedago:["Compréhension des étapes de construction","Visualisation 3D d’une maison","Lien entre créativité et règles techniques"] },
+  { id:"souvenirs", title:"BOX DES SOUVENIRS : SOUVENIR AVEC MAMAN !", version:"Version 1.0.0",
+    age:"5+", duration:"4 min", players:"1 joueur",
+    type:"Gestuelle • Emotion", image:"assets/affiche-17.jpg",
     tags:["Souvenirs","Photo","Narration"],
     short:"Une expérience émotionnelle où l’enfant rejoue, en images et en sons, des moments forts avec sa maman.",
-    pedago:[
-      "Expression des émotions positives",
-      "Renforcement du lien parent‑enfant",
-      "Développement de la mémoire affective"
-    ]
-  }
+    pedago:["Expression des émotions positives","Renforcement du lien parent‑enfant","Développement de la mémoire affective"] }
 ];
 
 function createCards(){
@@ -964,5 +751,6 @@ createCards();
 </script>
 </body>
 </html>
+
 
 
