@@ -10,7 +10,6 @@
       --bleu:#0050a8;
       --cyan:#00bfff;
       --blanc:#ffffff;
-      --gris:#f4f6fb;
       --txt:#122033;
       --radius:14px;
       --shadow:0 10px 25px rgba(0,0,0,0.25);
@@ -286,14 +285,6 @@
       position:relative;
       overflow:hidden;
     }
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:-40%;
-      background:radial-gradient(circle at top,var(--cyan) 0,transparent 55%);
-      opacity:.08;
-      pointer-events:none;
-    }
     .badge-age{
       position:absolute;
       top:10px;
@@ -306,14 +297,15 @@
     .thumb{
       height:110px;
       border-radius:12px;
-      background:linear-gradient(135deg,#1d4ed8,#22d3ee);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:26px;
+      overflow:hidden;
       margin-bottom:10px;
       position:relative;
-      overflow:hidden;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
     .thumb span.label{
       position:absolute;
@@ -323,6 +315,7 @@
       padding:3px 8px;
       border-radius:999px;
       background:rgba(0,0,0,.55);
+      color:#fff;
     }
     .card h3{
       font-size:14px;
@@ -414,20 +407,18 @@
     }
     .modal-thumb{
       border-radius:16px;
-      background:linear-gradient(135deg,#1d4ed8,#22d3ee);
+      overflow:hidden;
       height:190px;
       margin-bottom:10px;
+    }
+    .modal-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
     }
     .modal-info{
       font-size:13px;
       line-height:1.5;
-    }
-    .meta-line{
-      font-size:12px;
-      margin-bottom:6px;
-    }
-    .meta-line span{
-      opacity:.8;
     }
     .modal-kpis{
       display:flex;
@@ -494,13 +485,13 @@
   <div>
     <h1 class="hero-title">Découvrez les 17 jeux <br/>éducatifs WALL2TOUCH</h1>
     <p class="hero-sub">
-      Une collection de modules interactifs en gestuelle, VR sans casque et <strong>réalité</strong> augmentée,
+      Une collection de modules interactifs en gestuelle, VR sans casque et réalité augmentée,
       conçus pour apprendre en jouant sur un mur tactile immersif.
     </p>
     <div class="hero-tags">
       <div class="tag"><span class="dot"></span>1 &amp; 3 joueurs</div>
       <div class="tag"><span class="dot"></span>Durée : 2 à 4 min</div>
-      <div class="tag"><span class="dot"></span>Maths, Géométrie, Espace, Jeux &amp; Souvenirs</div>
+      <div class="tag"><span class="dot"></span>Math, Géométrie, Espace, Jeux &amp; Souvenirs</div>
     </div>
     <div class="hero-cta">
       <button class="btn-main" onclick="document.getElementById('galerie').scrollIntoView({behavior:'smooth'})">
@@ -519,7 +510,7 @@
     <div class="phone-frame">
       <div class="phone-notch"></div>
       <div class="phone-header">
-        <div class="phone-title">HOLOAQUA</div>
+        <div class="phone-title">WALL2TOUCH</div>
         <div>18:35</div>
       </div>
       <div class="phone-screen">
@@ -527,7 +518,7 @@
           <div style="font-size:11px;opacity:.9;margin-bottom:4px;">Sélection du jeu</div>
           <div class="dolphin"></div>
           <div style="text-align:center;font-size:11px;margin-bottom:6px;">
-            Dauphin gracieux – Effets holographiques réactifs à vos gestes
+            Robot JQ vous guide dans chaque expérience immersive.
           </div>
         </div>
         <div class="phone-grid">
@@ -555,14 +546,14 @@
     </div>
     <div class="filters">
       <div class="chip">Tous les jeux</div>
-      <div class="chip">Maths &amp; Géométrie</div>
+      <div class="chip">Math &amp; Géométrie</div>
       <div class="chip">VR sans casque</div>
       <div class="chip">Souvenirs &amp; émotions</div>
     </div>
   </div>
 
   <section class="grid" id="cards-container">
-    <!-- Les cartes seront injectées par JS -->
+    <!-- Cartes injectées par JS -->
   </section>
 
   <div class="brand-line">
@@ -579,14 +570,12 @@
         <h3 id="modal-title">Titre du module</h3>
         <div class="modal-tagline" id="modal-sub">Version &amp; catégorie</div>
       </div>
-      <div>
-        <div class="kpi">1 joueur</div>
-        <div class="kpi">Gestuelle</div>
-      </div>
     </div>
     <div class="modal-layout">
       <div>
-        <div class="modal-thumb" id="modal-thumb"></div>
+        <div class="modal-thumb" id="modal-thumb">
+          <!-- image -->
+        </div>
         <div class="modal-kpis" id="modal-kpis"></div>
       </div>
       <div class="modal-info">
@@ -627,6 +616,7 @@ const modules = [
     duration:"2 min",
     players:"1 à 3 joueurs",
     type:"Gestuelle • VR sans casque",
+    image:"assets/affiche-01.jpg",
     tags:["Hub central","Sélection de jeux","Score & chrono"],
     short:"Point d’entrée principal qui regroupe tous les univers : Math, Géométrie, Espace, Jeux, Souvenirs.",
     pedago:[
@@ -643,6 +633,7 @@ const modules = [
     duration:"2 min",
     players:"1 joueur",
     type:"Gestuelle • Vision par ordinateur",
+    image:"assets/affiche-02.jpg",
     tags:["Mathématiques","Equations","Chiffres flottants"],
     short:"Les mains remplacent la souris : l’enfant manipule chiffres et symboles pour résoudre des équations en temps réel.",
     pedago:[
@@ -653,12 +644,13 @@ const modules = [
   },
   {
     id:"geo",
-    title:"LA MAGIE DE LA GÉOMÉTRIE",
+    title:"LA MAGIE DE LA GEOMETRIE",
     version:"Version 1.0.0",
     age:"7+",
     duration:"3 min",
     players:"1 joueur",
     type:"Gestuelle • Dessin direct",
+    image:"assets/affiche-03.jpg",
     tags:["Formes géométriques","Coordination","Score chronométré"],
     short:"Guidé par une voix interactive, l’enfant dessine des formes géométriques avec ses doigts et obtient un score de précision.",
     pedago:[
@@ -675,6 +667,7 @@ const modules = [
     duration:"3 min",
     players:"1 joueur",
     type:"Quiz vocal • Exploration",
+    image:"assets/affiche-04.jpg",
     tags:["Sciences","Quiz","Aventure guidée"],
     short:"Une exploration guidée par la voix à travers jungles, océans et galaxies avec des questions à chaque étape.",
     pedago:[
@@ -691,6 +684,7 @@ const modules = [
     duration:"3 min",
     players:"1 joueur",
     type:"VR gestuelle",
+    image:"assets/affiche-05.jpg",
     tags:["3D","Créativité","Immersion"],
     short:"L’enfant dessine avec deux mains pour donner vie à des objets 3D projetés sur le mur, comme dans une VR sans casque.",
     pedago:[
@@ -707,6 +701,7 @@ const modules = [
     duration:"2 min",
     players:"1 joueur",
     type:"Gestuelle murale",
+    image:"assets/affiche-06.jpg",
     tags:["Plateforme","Motricité","Réflexes"],
     short:"Le mur devient un grand terrain de jeu type plateforme où l’enfant contrôle son personnage par les gestes.",
     pedago:[
@@ -723,6 +718,7 @@ const modules = [
     duration:"2 min",
     players:"1 joueur",
     type:"Gestuelle",
+    image:"assets/affiche-07.jpg",
     tags:["Coordination","Course poursuite","Robot JQ"],
     short:"Le joueur doit attraper le robot JQ qui se déplace partout sur le mur, uniquement avec les mains.",
     pedago:[
@@ -739,6 +735,7 @@ const modules = [
     duration:"3 min",
     players:"1 joueur",
     type:"VR gestuelle • Reconnaissance vocale",
+    image:"assets/affiche-08.jpg",
     tags:["Hologrammes","Musique","Créativité"],
     short:"L’enfant dessine avec son index des traits lumineux autour du robot JQ, accompagnés d’effets sonores et musicaux.",
     pedago:[
@@ -755,6 +752,7 @@ const modules = [
     duration:"3 min",
     players:"1 joueur",
     type:"VR gestuelle",
+    image:"assets/affiche-09.jpg",
     tags:["Réseaux lumineux","Volume","Observation"],
     short:"Les traits de lumière deviennent des filets 3D qui entourent l’enfant, créant un paysage holographique complexe.",
     pedago:[
@@ -771,6 +769,7 @@ const modules = [
     duration:"3 min",
     players:"1 joueur",
     type:"VR gestuelle",
+    image:"assets/affiche-10.jpg",
     tags:["Assemblage","Construction","Imagination"],
     short:"À partir de formes lumineuses, l’enfant assemble pas à pas un objet 3D complet dans l’espace projeté.",
     pedago:[
@@ -787,6 +786,7 @@ const modules = [
     duration:"3 min",
     players:"1 joueur",
     type:"VR gestuelle",
+    image:"assets/affiche-11.jpg",
     tags:["Motricité fine","Repérage","Lumière"],
     short:"L’enfant active des carreaux lumineux en touchant la surface, créant des motifs et chemins scintillants.",
     pedago:[
@@ -803,6 +803,7 @@ const modules = [
     duration:"3 min",
     players:"1 joueur",
     type:"Reconnaissance vocale • Gestuelle",
+    image:"assets/affiche-12.jpg",
     tags:["Héros","Construction","Narration"],
     short:"En suivant les instructions vocales, l’enfant construit petit à petit sa figurine de héros comme avec des LEGO.",
     pedago:[
@@ -819,6 +820,7 @@ const modules = [
     duration:"4 min",
     players:"1 joueur",
     type:"Gestuelle • Simulation",
+    image:"assets/affiche-13.jpg",
     tags:["Pilotage","Orientation","Immersion"],
     short:"L’enfant pilote un avion avec les gestes de ses bras, comme un véritable commandant de bord.",
     pedago:[
@@ -829,14 +831,15 @@ const modules = [
   },
   {
     id:"ra",
-    title:"LA RÉALITÉ AUGMENTÉE",
+    title:"LA REALITEE AUGMENTEE",
     version:"Version 1.0.0",
     age:"5+",
     duration:"4 min",
     players:"1 joueur",
     type:"Réalité augmentée",
+    image:"assets/affiche-14.jpg",
     tags:["Héros","Interaction","Univers mixte"],
-    short:"L’enfant entre dans une scène RA avec des personnages type Star Wars ou Marvel et tente de les attraper.",
+    short:"L’enfant entre dans une scène RA avec des personnages emblématiques et tente de les attraper.",
     pedago:[
       "Compréhension de l’espace mixte réel/virtuel",
       "Agilité et esquive",
@@ -845,12 +848,13 @@ const modules = [
   },
   {
     id:"gouttes",
-    title:"ATTRAPE DES GOUTTES D’EAU",
+    title:"ATTRAPE DES GOUTES D’EAU",
     version:"Version 1.0.0",
     age:"5+",
     duration:"4 min",
     players:"1 joueur",
     type:"Gestuelle • Score",
+    image:"assets/affiche-15.jpg",
     tags:["Eau","Vitesse","Coordination"],
     short:"Guidé par la voix, l’enfant attrape un maximum de gouttes d’eau qui tombent sur le mur.",
     pedago:[
@@ -867,6 +871,7 @@ const modules = [
     duration:"4 min",
     players:"1 joueur",
     type:"Gestuelle • Guidance vocale",
+    image:"assets/affiche-16.jpg",
     tags:["Architecture","Etapes","Création"],
     short:"Grâce à la détection des mains, l’enfant dessine et construit une maison en suivant les instructions vocales.",
     pedago:[
@@ -883,6 +888,7 @@ const modules = [
     duration:"4 min",
     players:"1 joueur",
     type:"Gestuelle • Emotion",
+    image:"assets/affiche-17.jpg",
     tags:["Souvenirs","Photo","Narration"],
     short:"Une expérience émotionnelle où l’enfant rejoue, en images et en sons, des moments forts avec sa maman.",
     pedago:[
@@ -901,7 +907,7 @@ function createCards(){
     card.innerHTML=`
       <div class="badge-age">${m.age}</div>
       <div class="thumb">
-        <span style="font-size:32px;">🎮</span>
+        <img src="${m.image}" alt="${m.title}">
         <span class="label">${m.type}</span>
       </div>
       <h3>${m.title}</h3>
@@ -942,6 +948,8 @@ function showModule(id){
     li.textContent=p;
     ul.appendChild(li);
   });
+  const thumb=document.getElementById('modal-thumb');
+  thumb.innerHTML=`<img src="${m.image}" alt="${m.title}">`;
   document.getElementById('modal-backdrop').style.display='flex';
 }
 
@@ -956,3 +964,5 @@ createCards();
 </script>
 </body>
 </html>
+
+
