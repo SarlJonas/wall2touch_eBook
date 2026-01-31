@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>WALL2TOUCH – Galerie de démos interactives</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --bleu-fonce:#001f3f;
+      --bleu:#0050a8;
+      --cyan:#00bfff;
+      --blanc:#ffffff;
+      --gris:#f4f6fb;
+      --txt:#122033;
+      --radius:14px;
+      --shadow:0 10px 25px rgba(0,0,0,0.25);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;}
+    body{
+      background:radial-gradient(circle at top,#003b88 0,#001326 60%,#000814 100%);
+      color:var(--blanc);
+      min-height:100vh;
+    }
+    a{text-decoration:none;color:inherit;}
+
+    /* HEADER / HERO */
+    header{
+      padding:20px 6vw 40px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .logo-box{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo-mark{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--cyan),var(--bleu));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      font-size:20px;
+    }
+    .logo-text span{
+      display:block;
+      font-size:11px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      opacity:.8;
+    }
+    .logo-text strong{
+      font-size:17px;
+      letter-spacing:1px;
+    }
+    .cta-top{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      font-size:13px;
+    }
+    .cta-top a.btn{
+      padding:8px 16px;
+      border-radius:999px;
+      background:var(--cyan);
+      color:#001326;
+      font-weight:600;
+      box-shadow:0 0 18px rgba(0,191,255,.45);
+    }
+    .cta-top span{
+      opacity:.8;
+    }
+
+    .hero{
+      padding:0 6vw 40px;
+      display:grid;
+      grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
+      gap:40px;
+      align-items:center;
+    }
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr;gap:24px;}
+    }
+    .hero-title{
+      font-size:34px;
+      line-height:1.15;
+      margin-bottom:12px;
+    }
+    .hero-sub{
+      font-size:17px;
+      max-width:540px;
+      opacity:.9;
+      margin-bottom:22px;
+    }
+    .hero-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:24px;
+    }
+    .tag{
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      font-size:12px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      backdrop-filter:blur(10px);
+    }
+    .tag span.dot{
+      width:6px;height:6px;border-radius:50%;background:var(--cyan);
+    }
+    .hero-cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+    }
+    .btn-main{
+      padding:12px 22px;
+      border-radius:999px;
+      background:linear-gradient(135deg,var(--cyan),var(--bleu));
+      color:#001326;
+      font-weight:700;
+      box-shadow:var(--shadow);
+      border:none;
+      cursor:pointer;
+      font-size:15px;
+    }
+    .btn-ghost{
+      padding:11px 20px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.3);
+      background:rgba(0,0,0,.15);
+      color:var(--blanc);
+      font-size:14px;
+      cursor:pointer;
+    }
+    .hero-note{
+      font-size:12px;
+      opacity:.8;
+      margin-top:8px;
+    }
+
+    .hero-mockup{
+      background:rgba(0,0,0,.45);
+      border-radius:32px;
+      padding:18px 18px 26px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-mockup::before{
+      content:"Démo mur tactile";
+      position:absolute;
+      top:14px;
+      right:18px;
+      font-size:11px;
+      opacity:.65;
+    }
+    .phone-frame{
+      width:100%;
+      max-width:320px;
+      margin:0 auto;
+      aspect-ratio:9/16;
+      border-radius:32px;
+      border:2px solid rgba(255,255,255,.1);
+      background:radial-gradient(circle at top,var(--cyan),#02101f 55%,#000000 100%);
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      padding:16px 14px;
+    }
+    .phone-notch{
+      width:70px;height:6px;border-radius:999px;
+      background:rgba(0,0,0,.65);
+      margin:0 auto 10px;
+    }
+    .phone-header{
+      display:flex;
+      justify-content:space-between;
+      font-size:11px;
+      opacity:.9;
+      margin-bottom:8px;
+    }
+    .phone-title{
+      font-size:13px;
+      letter-spacing:1px;
+    }
+    .phone-screen{
+      flex:1;
+      border-radius:20px;
+      background:radial-gradient(circle at top,#3ddcff,#001326 60%);
+      padding:16px 14px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      color:#e8fbff;
+    }
+    .dolphin{
+      width:90px;
+      height:90px;
+      border-radius:50%;
+      background:radial-gradient(circle at 30% 10%,#ffffff 0,#8df0ff 25%,#1c9dff 60%,#003b88 100%);
+      margin:0 auto 8px;
+      box-shadow:0 0 24px rgba(0,245,255,.9);
+      position:relative;
+    }
+    .dolphin::after{
+      content:"JQ";
+      position:absolute;
+      bottom:8px;
+      right:10px;
+      font-size:11px;
+      font-weight:700;
+    }
+    .phone-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:8px;
+      font-size:10px;
+    }
+    .phone-card{
+      background:rgba(0,0,0,.32);
+      border-radius:12px;
+      padding:6px 5px;
+      text-align:center;
+    }
+    .phone-footer{
+      margin-top:10px;
+      display:flex;
+      justify-content:space-between;
+      font-size:9px;
+      opacity:.85;
+    }
+
+    /* SECTION GALERIE */
+    main{
+      padding:10px 6vw 60px;
+      background:linear-gradient(to bottom,rgba(0,0,0,0) 0,#020617 40%,#000 100%);
+    }
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      margin-bottom:18px;
+    }
+    .section-head h2{
+      font-size:22px;
+    }
+    .section-head p{
+      font-size:13px;
+      opacity:.8;
+      max-width:430px;
+    }
+    .filters{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      font-size:11px;
+    }
+    .chip{
+      padding:5px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      opacity:.85;
+      cursor:pointer;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+      gap:18px;
+    }
+    .card{
+      background:rgba(15,23,42,.9);
+      border-radius:var(--radius);
+      padding:12px 12px 14px;
+      box-shadow:0 12px 20px rgba(0,0,0,.55);
+      border:1px solid rgba(148,163,184,.22);
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:radial-gradient(circle at top,var(--cyan) 0,transparent 55%);
+      opacity:.08;
+      pointer-events:none;
+    }
+    .badge-age{
+      position:absolute;
+      top:10px;
+      right:10px;
+      padding:4px 8px;
+      border-radius:999px;
+      background:rgba(15,118,110,.95);
+      font-size:11px;
+    }
+    .thumb{
+      height:110px;
+      border-radius:12px;
+      background:linear-gradient(135deg,#1d4ed8,#22d3ee);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:26px;
+      margin-bottom:10px;
+      position:relative;
+      overflow:hidden;
+    }
+    .thumb span.label{
+      position:absolute;
+      bottom:6px;
+      right:8px;
+      font-size:10px;
+      padding:3px 8px;
+      border-radius:999px;
+      background:rgba(0,0,0,.55);
+    }
+    .card h3{
+      font-size:14px;
+      margin-bottom:4px;
+    }
+    .meta{
+      font-size:11px;
+      opacity:.8;
+      margin-bottom:8px;
+    }
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin-bottom:10px;
+    }
+    .pill{
+      padding:3px 8px;
+      border-radius:999px;
+      background:rgba(15,23,42,.9);
+      border:1px solid rgba(148,163,184,.5);
+      font-size:10px;
+    }
+    .card button{
+      width:100%;
+      margin-top:4px;
+      padding:7px 0;
+      border-radius:999px;
+      border:none;
+      cursor:pointer;
+      background:linear-gradient(135deg,var(--cyan),var(--bleu));
+      color:#001326;
+      font-size:13px;
+      font-weight:600;
+    }
+
+    /* MODALE DÉTAIL */
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.7);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:50;
+    }
+    .modal{
+      width:min(780px,92vw);
+      max-height:90vh;
+      overflow:auto;
+      background:radial-gradient(circle at top left,#172554,#020617 55%);
+      border-radius:22px;
+      padding:20px 22px 18px;
+      box-shadow:0 24px 40px rgba(0,0,0,.8);
+      position:relative;
+      color:var(--blanc);
+    }
+    .modal-close{
+      position:absolute;
+      top:10px;
+      right:14px;
+      border:none;
+      background:transparent;
+      color:#9ca3af;
+      font-size:18px;
+      cursor:pointer;
+    }
+    .modal-header{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:10px;
+      align-items:center;
+    }
+    .modal-header h3{
+      font-size:20px;
+    }
+    .modal-tagline{
+      font-size:12px;
+      opacity:.8;
+    }
+    .modal-layout{
+      display:grid;
+      grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
+      gap:16px;
+    }
+    @media(max-width:800px){
+      .modal-layout{grid-template-columns:1fr;}
+    }
+    .modal-thumb{
+      border-radius:16px;
+      background:linear-gradient(135deg,#1d4ed8,#22d3ee);
+      height:190px;
+      margin-bottom:10px;
+    }
+    .modal-info{
+      font-size:13px;
+      line-height:1.5;
+    }
+    .meta-line{
+      font-size:12px;
+      margin-bottom:6px;
+    }
+    .meta-line span{
+      opacity:.8;
+    }
+    .modal-kpis{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:10px 0 12px;
+      font-size:12px;
+    }
+    .kpi{
+      padding:6px 10px;
+      border-radius:10px;
+      background:rgba(15,23,42,.9);
+      border:1px solid rgba(148,163,184,.4);
+    }
+    .modal-footer{
+      margin-top:10px;
+      font-size:12px;
+      opacity:.85;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      justify-content:space-between;
+    }
+    .brand-line{
+      font-size:12px;
+      opacity:.85;
+      margin-top:8px;
+      border-top:1px solid rgba(148,163,184,.4);
+      padding-top:8px;
+    }
+
+    footer{
+      padding:18px 6vw 26px;
+      font-size:12px;
+      color:#cbd5f5;
+      background:#020617;
+      border-top:1px solid rgba(148,163,184,.4);
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:space-between;
+      align-items:center;
+    }
+    footer a{color:#38bdf8;}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo-box">
+    <div class="logo-mark">JQ</div>
+    <div class="logo-text">
+      <span>WALL2TOUCH</span>
+      <strong>Mur Tactile • Robot JQ</strong>
+    </div>
+  </div>
+  <div class="cta-top">
+    <span>Galerie démo – 17 fiches interactives</span>
+    <a href="#galerie" class="btn">Voir la galerie</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <h1 class="hero-title">Découvrez les 17 jeux <br/>éducatifs WALL2TOUCH</h1>
+    <p class="hero-sub">
+      Une collection de modules interactifs en gestuelle, VR sans casque et <strong>réalité</strong> augmentée,
+      conçus pour apprendre en jouant sur un mur tactile immersif.
+    </p>
+    <div class="hero-tags">
+      <div class="tag"><span class="dot"></span>1 &amp; 3 joueurs</div>
+      <div class="tag"><span class="dot"></span>Durée : 2 à 4 min</div>
+      <div class="tag"><span class="dot"></span>Maths, Géométrie, Espace, Jeux &amp; Souvenirs</div>
+    </div>
+    <div class="hero-cta">
+      <button class="btn-main" onclick="document.getElementById('galerie').scrollIntoView({behavior:'smooth'})">
+        Lancer la galerie démo
+      </button>
+      <button class="btn-ghost">
+        Télécharger la fiche PDF
+      </button>
+    </div>
+    <p class="hero-note">
+      Idée, développement &amp; conception Engineering software : Gautier Hayet – www.wall2touch.com
+    </p>
+  </div>
+
+  <div class="hero-mockup">
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-header">
+        <div class="phone-title">HOLOAQUA</div>
+        <div>18:35</div>
+      </div>
+      <div class="phone-screen">
+        <div>
+          <div style="font-size:11px;opacity:.9;margin-bottom:4px;">Sélection du jeu</div>
+          <div class="dolphin"></div>
+          <div style="text-align:center;font-size:11px;margin-bottom:6px;">
+            Dauphin gracieux – Effets holographiques réactifs à vos gestes
+          </div>
+        </div>
+        <div class="phone-grid">
+          <div class="phone-card">Math<br/>Flottants</div>
+          <div class="phone-card">Magie<br/>Géométrie</div>
+          <div class="phone-card">Terre<br/>&amp; Espace</div>
+          <div class="phone-card">Mario<br/>Gestuel</div>
+          <div class="phone-card">Catch<br/>JQ</div>
+          <div class="phone-card">Holo<br/>Dessin</div>
+        </div>
+        <div class="phone-footer">
+          <span>1 joueur • Gestuelle</span>
+          <span>Durée : 2–4 min</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main id="galerie">
+  <div class="section-head">
+    <div>
+      <h2>Galerie des 17 affiches</h2>
+      <p>Parcourez chaque module comme une fiche produit. Cliquez sur « Voir la démo » pour afficher la description détaillée, l’objectif pédagogique et les infos pratiques.</p>
+    </div>
+    <div class="filters">
+      <div class="chip">Tous les jeux</div>
+      <div class="chip">Maths &amp; Géométrie</div>
+      <div class="chip">VR sans casque</div>
+      <div class="chip">Souvenirs &amp; émotions</div>
+    </div>
+  </div>
+
+  <section class="grid" id="cards-container">
+    <!-- Les cartes seront injectées par JS -->
+  </section>
+
+  <div class="brand-line">
+    WALL2TOUCH : APPLICATION PRINCIPALE – Mur tactile interactif, vision par ordinateur, reconnaissance vocale et effets holographiques. 
+    Idée &amp; développement : Gautier Hayet – Contact : 06 52 57 37 79 • info@wall2touch.com
+  </div>
+</main>
+
+<div class="modal-backdrop" id="modal-backdrop" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="hideModal()">×</button>
+    <div class="modal-header">
+      <div>
+        <h3 id="modal-title">Titre du module</h3>
+        <div class="modal-tagline" id="modal-sub">Version &amp; catégorie</div>
+      </div>
+      <div>
+        <div class="kpi">1 joueur</div>
+        <div class="kpi">Gestuelle</div>
+      </div>
+    </div>
+    <div class="modal-layout">
+      <div>
+        <div class="modal-thumb" id="modal-thumb"></div>
+        <div class="modal-kpis" id="modal-kpis"></div>
+      </div>
+      <div class="modal-info">
+        <p id="modal-desc"></p>
+        <div style="margin-top:10px;">
+          <strong>Atouts pédagogiques :</strong>
+          <ul id="modal-pedago" style="margin-top:4px;padding-left:18px;"></ul>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div>
+        📞 06 52 57 37 79 • 🌐 www.wall2touch.com • 📧 info@wall2touch.com
+      </div>
+      <div>
+        Idée &amp; conception : Gautier Hayet – Robot JQ • WALL2TOUCH
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>
+    © 2026 WALL2TOUCH – JONAS BROWSER HIGH-TECH. Tous droits réservés.
+  </div>
+  <div>
+    Mur tactile éducatif • Robot JQ • <a href="https://www.wall2touch.com" target="_blank">www.wall2touch.com</a>
+  </div>
+</footer>
+
+<script>
+const modules = [
+  {
+    id:"main",
+    title:"WALL2TOUCH : Application principale",
+    version:"Hub des 17 jeux",
+    age:"4+",
+    duration:"2 min",
+    players:"1 à 3 joueurs",
+    type:"Gestuelle • VR sans casque",
+    tags:["Hub central","Sélection de jeux","Score & chrono"],
+    short:"Point d’entrée principal qui regroupe tous les univers : Math, Géométrie, Espace, Jeux, Souvenirs.",
+    pedago:[
+      "Découverte libre des jeux adaptés à l’âge",
+      "Motivation par le score et le temps",
+      "Apprentissage par exploration"
+    ]
+  },
+  {
+    id:"math",
+    title:"MATH EN FLOTTANTS",
+    version:"Version 1.0.0",
+    age:"6+",
+    duration:"2 min",
+    players:"1 joueur",
+    type:"Gestuelle • Vision par ordinateur",
+    tags:["Mathématiques","Equations","Chiffres flottants"],
+    short:"Les mains remplacent la souris : l’enfant manipule chiffres et symboles pour résoudre des équations en temps réel.",
+    pedago:[
+      "Compréhension des opérations de base",
+      "Lien entre geste et symbole numérique",
+      "Renforcement de la concentration"
+    ]
+  },
+  {
+    id:"geo",
+    title:"LA MAGIE DE LA GÉOMÉTRIE",
+    version:"Version 1.0.0",
+    age:"7+",
+    duration:"3 min",
+    players:"1 joueur",
+    type:"Gestuelle • Dessin direct",
+    tags:["Formes géométriques","Coordination","Score chronométré"],
+    short:"Guidé par une voix interactive, l’enfant dessine des formes géométriques avec ses doigts et obtient un score de précision.",
+    pedago:[
+      "Reconnaissance des formes et figures",
+      "Coordination œil–main",
+      "Esprit logique et sens du détail"
+    ]
+  },
+  {
+    id:"terre-espace",
+    title:"TERRE & ESPACE",
+    version:"Version 1.0.0",
+    age:"7+",
+    duration:"3 min",
+    players:"1 joueur",
+    type:"Quiz vocal • Exploration",
+    tags:["Sciences","Quiz","Aventure guidée"],
+    short:"Une exploration guidée par la voix à travers jungles, océans et galaxies avec des questions à chaque étape.",
+    pedago:[
+      "Culture générale sur les milieux naturels et l’espace",
+      "Expression orale grâce aux réponses vocales",
+      "Esprit de décision par le choix d’itinéraires"
+    ]
+  },
+  {
+    id:"objets3d",
+    title:"CONSTRUCTION DES OBJETS EN 3D",
+    version:"Version 1.1 – VR sans casque",
+    age:"7+",
+    duration:"3 min",
+    players:"1 joueur",
+    type:"VR gestuelle",
+    tags:["3D","Créativité","Immersion"],
+    short:"L’enfant dessine avec deux mains pour donner vie à des objets 3D projetés sur le mur, comme dans une VR sans casque.",
+    pedago:[
+      "Compréhension des volumes et de la perspective",
+      "Développement de l’imagination spatiale",
+      "Lien entre geste et rendu numérique"
+    ]
+  },
+  {
+    id:"mario",
+    title:"JEUX MARIO",
+    version:"Version 1.0.0",
+    age:"6+",
+    duration:"2 min",
+    players:"1 joueur",
+    type:"Gestuelle murale",
+    tags:["Plateforme","Motricité","Réflexes"],
+    short:"Le mur devient un grand terrain de jeu type plateforme où l’enfant contrôle son personnage par les gestes.",
+    pedago:[
+      "Coordination globale du corps",
+      "Anticipation des obstacles",
+      "Gestion du temps de réaction"
+    ]
+  },
+  {
+    id:"catchjq",
+    title:"JEUX CATCH_JQ",
+    version:"Version 1.0.0",
+    age:"4+",
+    duration:"2 min",
+    players:"1 joueur",
+    type:"Gestuelle",
+    tags:["Coordination","Course poursuite","Robot JQ"],
+    short:"Le joueur doit attraper le robot JQ qui se déplace partout sur le mur, uniquement avec les mains.",
+    pedago:[
+      "Développement de la motricité fine et globale",
+      "Attention et réactivité",
+      "Gestion de l’espace visuel"
+    ]
+  },
+  {
+    id:"holo1",
+    title:"DESSIN HOLOGRAPHIQUE",
+    version:"Version 1.1.1 – VR sans casque",
+    age:"5+",
+    duration:"3 min",
+    players:"1 joueur",
+    type:"VR gestuelle • Reconnaissance vocale",
+    tags:["Hologrammes","Musique","Créativité"],
+    short:"L’enfant dessine avec son index des traits lumineux autour du robot JQ, accompagnés d’effets sonores et musicaux.",
+    pedago:[
+      "Expression artistique libre",
+      "Synchronisation geste–son",
+      "Développement de l’imaginaire"
+    ]
+  },
+  {
+    id:"holo2",
+    title:"DESSIN HOLOGRAPHIQUE – Réseaux 3D",
+    version:"Version 1.1.2 – VR sans casque",
+    age:"5+",
+    duration:"3 min",
+    players:"1 joueur",
+    type:"VR gestuelle",
+    tags:["Réseaux lumineux","Volume","Observation"],
+    short:"Les traits de lumière deviennent des filets 3D qui entourent l’enfant, créant un paysage holographique complexe.",
+    pedago:[
+      "Perception de la profondeur",
+      "Patience et persévérance",
+      "Lien entre sciences et art numérique"
+    ]
+  },
+  {
+    id:"build3d",
+    title:"CONSTRUIRE DES OBJETS EN 3D",
+    version:"Version 1.1.2 – VR sans casque",
+    age:"5+",
+    duration:"3 min",
+    players:"1 joueur",
+    type:"VR gestuelle",
+    tags:["Assemblage","Construction","Imagination"],
+    short:"À partir de formes lumineuses, l’enfant assemble pas à pas un objet 3D complet dans l’espace projeté.",
+    pedago:[
+      "Pensée séquentielle (étape par étape)",
+      "Compétences pré‑architecture",
+      "Logique de construction"
+    ]
+  },
+  {
+    id:"points",
+    title:"CONSTRUIT DES POINTS LUMINEUX",
+    version:"Version 1.1.4 – VR sans casque",
+    age:"5+",
+    duration:"3 min",
+    players:"1 joueur",
+    type:"VR gestuelle",
+    tags:["Motricité fine","Repérage","Lumière"],
+    short:"L’enfant active des carreaux lumineux en touchant la surface, créant des motifs et chemins scintillants.",
+    pedago:[
+      "Précision des gestes",
+      "Reconnaissance de motifs",
+      "Créativité visuelle"
+    ]
+  },
+  {
+    id:"lego",
+    title:"LE LEGO MES HEROS",
+    version:"Version 1.0.0",
+    age:"5+",
+    duration:"3 min",
+    players:"1 joueur",
+    type:"Reconnaissance vocale • Gestuelle",
+    tags:["Héros","Construction","Narration"],
+    short:"En suivant les instructions vocales, l’enfant construit petit à petit sa figurine de héros comme avec des LEGO.",
+    pedago:[
+      "Compréhension orale",
+      "Planification et organisation",
+      "Création de personnages et d’histoires"
+    ]
+  },
+  {
+    id:"avion",
+    title:"SIMULATION DE L’AVION",
+    version:"Version 1.0.0",
+    age:"5+",
+    duration:"4 min",
+    players:"1 joueur",
+    type:"Gestuelle • Simulation",
+    tags:["Pilotage","Orientation","Immersion"],
+    short:"L’enfant pilote un avion avec les gestes de ses bras, comme un véritable commandant de bord.",
+    pedago:[
+      "Notions de direction et trajectoire",
+      "Gestion de la coordination bilatérale",
+      "Confiance en soi par le rôle de pilote"
+    ]
+  },
+  {
+    id:"ra",
+    title:"LA RÉALITÉ AUGMENTÉE",
+    version:"Version 1.0.0",
+    age:"5+",
+    duration:"4 min",
+    players:"1 joueur",
+    type:"Réalité augmentée",
+    tags:["Héros","Interaction","Univers mixte"],
+    short:"L’enfant entre dans une scène RA avec des personnages type Star Wars ou Marvel et tente de les attraper.",
+    pedago:[
+      "Compréhension de l’espace mixte réel/virtuel",
+      "Agilité et esquive",
+      "Capacité d’attention prolongée"
+    ]
+  },
+  {
+    id:"gouttes",
+    title:"ATTRAPE DES GOUTTES D’EAU",
+    version:"Version 1.0.0",
+    age:"5+",
+    duration:"4 min",
+    players:"1 joueur",
+    type:"Gestuelle • Score",
+    tags:["Eau","Vitesse","Coordination"],
+    short:"Guidé par la voix, l’enfant attrape un maximum de gouttes d’eau qui tombent sur le mur.",
+    pedago:[
+      "Rapidité de décision",
+      "Contrôle moteur des mains",
+      "Gestion de la frustration et du challenge"
+    ]
+  },
+  {
+    id:"home",
+    title:"BUILDING HOME",
+    version:"Version 1.0.0",
+    age:"7+",
+    duration:"4 min",
+    players:"1 joueur",
+    type:"Gestuelle • Guidance vocale",
+    tags:["Architecture","Etapes","Création"],
+    short:"Grâce à la détection des mains, l’enfant dessine et construit une maison en suivant les instructions vocales.",
+    pedago:[
+      "Compréhension des étapes de construction",
+      "Visualisation 3D d’une maison",
+      "Lien entre créativité et règles techniques"
+    ]
+  },
+  {
+    id:"souvenirs",
+    title:"BOX DES SOUVENIRS : SOUVENIR AVEC MAMAN !",
+    version:"Version 1.0.0",
+    age:"5+",
+    duration:"4 min",
+    players:"1 joueur",
+    type:"Gestuelle • Emotion",
+    tags:["Souvenirs","Photo","Narration"],
+    short:"Une expérience émotionnelle où l’enfant rejoue, en images et en sons, des moments forts avec sa maman.",
+    pedago:[
+      "Expression des émotions positives",
+      "Renforcement du lien parent‑enfant",
+      "Développement de la mémoire affective"
+    ]
+  }
+];
+
+function createCards(){
+  const container = document.getElementById('cards-container');
+  modules.forEach(m=>{
+    const card=document.createElement('article');
+    card.className='card';
+    card.innerHTML=`
+      <div class="badge-age">${m.age}</div>
+      <div class="thumb">
+        <span style="font-size:32px;">🎮</span>
+        <span class="label">${m.type}</span>
+      </div>
+      <h3>${m.title}</h3>
+      <div class="meta">${m.version}</div>
+      <div class="meta">${m.players} • Durée : ${m.duration}</div>
+      <div class="pill-row">
+        ${m.tags.map(t=>`<span class="pill">${t}</span>`).join("")}
+      </div>
+      <button onclick="showModule('${m.id}')">Voir la démo</button>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function showModule(id){
+  const m = modules.find(x=>x.id===id);
+  if(!m)return;
+  document.getElementById('modal-title').textContent = m.title;
+  document.getElementById('modal-sub').textContent = `${m.version} • ${m.type}`;
+  const kpis = [
+    `Âge conseillé : ${m.age}`,
+    `Durée moyenne : ${m.duration}`,
+    `Joueurs : ${m.players}`
+  ];
+  const kpiBox=document.getElementById('modal-kpis');
+  kpiBox.innerHTML='';
+  kpis.forEach(v=>{
+    const d=document.createElement('div');
+    d.className='kpi';
+    d.textContent=v;
+    kpiBox.appendChild(d);
+  });
+  document.getElementById('modal-desc').textContent = m.short;
+  const ul=document.getElementById('modal-pedago');
+  ul.innerHTML='';
+  m.pedago.forEach(p=>{
+    const li=document.createElement('li');
+    li.textContent=p;
+    ul.appendChild(li);
+  });
+  document.getElementById('modal-backdrop').style.display='flex';
+}
+
+function hideModal(){
+  document.getElementById('modal-backdrop').style.display='none';
+}
+function closeModal(e){
+  if(e.target.id==='modal-backdrop'){ hideModal(); }
+}
+
+createCards();
+</script>
+</body>
+</html>
